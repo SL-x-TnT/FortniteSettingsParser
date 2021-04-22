@@ -10,7 +10,7 @@ namespace SettingsParserConsole
         {
             SettingsParser parser = new SettingsParser("fullSettings.sav");
 
-            parser.ReadSettings();
+            var jsonData = JsonConvert.SerializeObject(parser.ReadSettings(), Formatting.Indented);
         }
     }
 }

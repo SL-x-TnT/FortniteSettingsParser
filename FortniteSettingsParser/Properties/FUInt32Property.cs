@@ -6,19 +6,16 @@ using System.Threading.Tasks;
 
 namespace FortniteSettingsParser.Properties
 {
-    public class FBoolProperty : UProperty
+    public class FUInt32Property : UProperty
     {
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)
         {
-            Value = reader.ReadBoolean();
+
         }
 
         protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
-            if(Value == null)
-            {
-                Value = reader.ReadBoolean();
-            }
+            Value = reader.ReadUInt32();
         }
     }
 }

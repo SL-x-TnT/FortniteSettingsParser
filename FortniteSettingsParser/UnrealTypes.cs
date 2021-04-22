@@ -21,6 +21,7 @@ namespace FortniteSettingsParser
 			{ "MapProperty", () => new FMapProperty() },
 			{ "ArrayProperty", () => new FArrayProperty() },
 			{ "IntProperty", () => new FIntProperty() },
+			{ "UInt32Property", () => new FUInt32Property() },
 			{ "ByteProperty", () => new FByteProperty() },
 			{ "Vector2D", () => new FVector2D() },
 			{ "DateTime", () => new FDateTime() },

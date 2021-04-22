@@ -8,11 +8,11 @@ namespace FortniteSettingsParser.Properties
 {
     public class FByteProperty : UProperty
     {
-        public string EnumName { get; private set; }
+        public string Name { get; private set; }
 
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)
         {
-            EnumName = reader.ReadFString();
+            Name = reader.ReadFString();
         }
 
         protected internal override void DeserializeProperty(UnrealBinaryReader reader)
