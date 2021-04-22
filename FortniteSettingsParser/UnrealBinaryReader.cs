@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FortniteSettingsParser.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,6 +55,28 @@ namespace FortniteSettingsParser
         public string ReadGuid()
         {
             return ReadBytesToString(16);
+        }
+
+        public Dictionary<string, UProperty> ReadProperties()
+        {
+            Dictionary<string, UProperty> properties = new Dictionary<string, UProperty>();
+
+            while (true)
+            {
+                string settingName = ReadFString();
+
+                if (settingName == "None")
+                {
+                    return properties;
+                }
+
+                string type = ReadFString();
+                UProperty uProperty = UnrealTypes.GetPropertyByName(type);
+
+                uProperty.Deserialize(this);
+
+                properties.Add(settingName, uProperty);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FortniteSettingsParser
 {
     public class UnrealTypes
     {
-		public static Dictionary<string, Func<UProperty>> Types = new Dictionary<string, Func<UProperty>>
+		private static Dictionary<string, Func<UProperty>> _types = new Dictionary<string, Func<UProperty>>
 		{
 			{ "FloatProperty", () => new FFloatProperty() },
 			{ "NameProperty", () => new FNameProperty() },
@@ -22,6 +22,32 @@ namespace FortniteSettingsParser
 			{ "ArrayProperty", () => new FArrayProperty() },
 			{ "IntProperty", () => new FIntProperty() },
 			{ "ByteProperty", () => new FByteProperty() },
+			{ "Vector2D", () => new FVector2D() },
+			{ "DateTime", () => new FDateTime() },
+			{ "Guid", () => new FGuid() }
 		};
-    }
+
+		public static bool HasPropertyName(string name)
+        {
+			return _types.ContainsKey(name);
+        }
+
+		public static UProperty GetPropertyByName(string name)
+        {
+			UProperty uProperty = null;
+
+			if (!_types.TryGetValue(name, out Func<UProperty> propertyFunc))
+			{
+				throw new NotImplementedException($"Type {name} currently not implemented");
+			}
+			else
+			{
+				uProperty = propertyFunc();
+			}
+
+			uProperty.TypeName = name;
+
+			return uProperty;
+		}
+	}
 }

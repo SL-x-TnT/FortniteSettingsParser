@@ -25,8 +25,9 @@ namespace FortniteSettingsParser
             using UnrealBinaryReader decompressedStream = Decompress();
 
             settings.Header = ParseSettingsHeader(decompressedStream);
+
             settings.GuidData = ParseGuidData(decompressedStream);
-            settings.Settings = ParseProperties(decompressedStream);
+            settings.Settings = decompressedStream.ReadProperties();
 
             return settings;
         }
@@ -90,37 +91,6 @@ namespace FortniteSettingsParser
             return data;
         }
 
-        private Dictionary<string, UProperty> ParseProperties(UnrealBinaryReader reader)
-        {
-            Dictionary<string, UProperty> properties = new Dictionary<string, UProperty>();
-
-            while (true)
-            {
-                string settingName = reader.ReadFString();
-
-                if(settingName == "None")
-                {
-                    return properties;
-                }
-
-                string type = reader.ReadFString();
-                UProperty uProperty;
-
-                if (!UnrealTypes.Types.TryGetValue(type, out Func<UProperty> propertyFunc))
-                {
-                    throw new NotImplementedException($"Type {type} currently not implemented");
-                }
-                else
-                {
-                    uProperty = propertyFunc();
-                }
-
-                uProperty.TypeName = type;
-                uProperty.Deserialize(reader);
-
-                properties.Add(settingName, uProperty);
-            }
-        }
 
         private MemoryStream DecompressData(byte[] data, int length)
         {
