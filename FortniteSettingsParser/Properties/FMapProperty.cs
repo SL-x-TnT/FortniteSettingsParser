@@ -17,7 +17,7 @@ namespace FortniteSettingsParser.Properties
             ValueType = reader.ReadFString();
         }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             base.DeserializeProperty(reader);
         }

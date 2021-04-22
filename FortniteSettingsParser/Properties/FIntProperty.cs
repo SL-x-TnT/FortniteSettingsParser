@@ -13,7 +13,7 @@ namespace FortniteSettingsParser.Properties
 
         }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             Value = reader.ReadInt32();
         }

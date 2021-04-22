@@ -15,7 +15,7 @@ namespace FortniteSettingsParser.Properties
             EnumName = reader.ReadFString();
         }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             Value = reader.ReadByte();
         }

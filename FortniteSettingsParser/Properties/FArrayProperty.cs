@@ -9,30 +9,30 @@ namespace FortniteSettingsParser.Properties
     public class FArrayProperty : UProperty
     {
         public string InnerType { get; private set; }
-        public Dictionary<string, UProperty> Items { get; private set; } = new Dictionary<string, UProperty>();
+        public List<UProperty> Items { get; private set; } = new List<UProperty>();
 
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)
         {
             InnerType = reader.ReadFString();
         }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
-            base.DeserializeProperty(reader);
-
-            return;
-
             int count = reader.ReadInt32();
 
             string settingName = reader.ReadFString();
             string typeName = reader.ReadFString();
 
             UProperty property = UnrealTypes.GetPropertyByName(InnerType);
-            property.Deserialize(reader);
+            property.DeserializeTypeInfo(reader);
 
             for (int i = 0; i < count; i++)
             {
                 UProperty arrayType = UnrealTypes.GetPropertyByName(property.TypeName);
+                arrayType.DeserializeProperty(reader);
+                arrayType.ArrayIndex = i;
+
+                Items.Add(arrayType);
             }
         }
     }

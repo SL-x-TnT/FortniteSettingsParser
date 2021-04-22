@@ -8,7 +8,7 @@ namespace FortniteSettingsParser.Properties
 {
     public class FGuid : UStruct
     {
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             Value = reader.ReadGuid();
         }

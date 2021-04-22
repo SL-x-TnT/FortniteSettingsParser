@@ -17,7 +17,7 @@ namespace FortniteSettingsParser.Properties
             StructGuid = reader.ReadGuid();
         }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             if(StructName == null || !UnrealTypes.HasPropertyName(StructName))
             {

@@ -11,7 +11,7 @@ namespace FortniteSettingsParser.Properties
         public float X { get; private set; }
         public float Y { get; private set; }
 
-        protected override void DeserializeProperty(UnrealBinaryReader reader)
+        protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             X = reader.ReadSingle();
             Y = reader.ReadSingle();
