@@ -29,6 +29,8 @@ namespace FortniteSettingsParser.Properties
 
                 items.Add(property);
             }
+
+            Value = items;
         }
 
     }
