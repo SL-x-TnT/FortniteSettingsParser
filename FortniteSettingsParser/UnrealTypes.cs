@@ -20,6 +20,7 @@ namespace FortniteSettingsParser
 			{ "StructProperty", () => new FStructProperty() },
 			{ "MapProperty", () => new FMapProperty() },
 			{ "ArrayProperty", () => new FArrayProperty() },
+			{ "SetProperty", () => new FSetProperty() },
 			{ "IntProperty", () => new FIntProperty() },
 			{ "UInt32Property", () => new FUInt32Property() },
 			{ "ByteProperty", () => new FByteProperty() },

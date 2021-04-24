@@ -17,6 +17,9 @@
     <None Update="fullSettings.sav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="setProperty.sav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="test.data">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -8,7 +8,7 @@ namespace SettingsParserConsole
     {
         static void Main(string[] args)
         {
-            SettingsParser parser = new SettingsParser("fullSettings.sav");
+            SettingsParser parser = new SettingsParser("setProperty.sav");
 
             var jsonData = JsonConvert.SerializeObject(parser.ReadSettings(), Formatting.Indented);
         }
