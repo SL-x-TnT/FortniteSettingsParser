@@ -34,8 +34,7 @@ namespace FortniteSettingsParser
 
             if (isUnicode)
             {
-                length = -2 * length;
-                data = ReadBytes(length);
+                data = ReadBytes(-length);
                 value = Encoding.Unicode.GetString(data);
             }
             else

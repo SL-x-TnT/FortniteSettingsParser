@@ -21,19 +21,40 @@ namespace FortniteSettingsParser.Properties
 
             int count = reader.ReadInt32();
 
-            string settingName = reader.ReadFString();
-            string typeName = reader.ReadFString();
+            string innerTypeName = null;
 
-            UProperty property = UnrealTypes.GetPropertyByName(_innerType);
-            property.DeserializeTypeInfo(reader);
+            if (_innerType == "StructProperty")
+            {
+                string settingName = reader.ReadFString();
+                string typeName = reader.ReadFString();
+
+                UProperty property = UnrealTypes.GetPropertyByName(_innerType);
+                property.DeserializeTypeInfo(reader);
+
+                innerTypeName = property.TypeName;
+
+                if (property is FStructProperty structProperty)
+                {
+                    if (UnrealTypes.HasPropertyName(structProperty._structName))
+                    {
+                        innerTypeName = structProperty._structName;
+                    }
+                }
+            }
 
             for (int i = 0; i < count; i++)
             {
-                UProperty arrayType = UnrealTypes.GetPropertyByName(property.TypeName);
+                UProperty arrayType = UnrealTypes.GetPropertyByName(innerTypeName ?? _innerType);
+
                 arrayType.DeserializeProperty(reader);
                 arrayType.ArrayIndex = i;
 
                 items.Add(arrayType);
+
+                if(i == 2800)
+                {
+
+                }
             }
 
             Value = items;

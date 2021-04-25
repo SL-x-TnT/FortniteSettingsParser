@@ -24,6 +24,11 @@ namespace FortniteSettingsParser
 
             using UnrealBinaryReader decompressedStream = Decompress();
 
+#if DEBUG
+            File.WriteAllBytes("decompressed.dat", decompressedStream.ReadBytes((int)decompressedStream.BaseStream.Length));
+
+            decompressedStream.BaseStream.Seek(0, SeekOrigin.Begin);
+#endif
             settings.Header = ParseSettingsHeader(decompressedStream);
 
             settings.GuidData = ParseGuidData(decompressedStream);

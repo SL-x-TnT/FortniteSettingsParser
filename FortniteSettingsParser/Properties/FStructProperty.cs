@@ -8,7 +8,7 @@ namespace FortniteSettingsParser.Properties
 {
     public class FStructProperty : UProperty
     {
-        private string _structName;
+        internal string _structName;
         private string _structGuid;
 
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)

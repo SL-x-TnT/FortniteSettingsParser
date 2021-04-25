@@ -26,6 +26,12 @@ namespace FortniteSettingsParser.Properties
             NumKeysToRemove = reader.ReadInt32();
             int numEntries = reader.ReadInt32();
 
+            for (int i = 0; i < NumKeysToRemove; i++)
+            {
+                UProperty propertyKey = UnrealTypes.GetPropertyByName(_innerType);
+                propertyKey.DeserializeProperty(reader);
+            }
+
             for (int i = 0; i < numEntries; i++)
             {
                 UProperty propertyKey = UnrealTypes.GetPropertyByName(_innerType);

@@ -10,6 +10,8 @@ namespace FortniteSettingsParser.Properties
     {
         private string _innerType;
 
+        protected int NumKeysToRemove { get; set; }
+
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)
         {
             _innerType = reader.ReadFString();
@@ -19,8 +21,15 @@ namespace FortniteSettingsParser.Properties
         {
             List<UProperty> items = new List<UProperty>();
 
-            reader.ReadInt32(); //?
+            NumKeysToRemove = reader.ReadInt32();
+
             int count = reader.ReadInt32();
+
+            for (int i = 0; i < NumKeysToRemove; i++)
+            {
+                UProperty property = UnrealTypes.GetPropertyByName(_innerType);
+                property.DeserializeProperty(reader);
+            }
 
             for(int i = 0; i < count; i++)
             {

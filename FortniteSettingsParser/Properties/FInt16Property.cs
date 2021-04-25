@@ -6,25 +6,16 @@ using System.Threading.Tasks;
 
 namespace FortniteSettingsParser.Properties
 {
-    public class FByteProperty : UProperty
+    public class FInt16Property : UProperty
     {
-        public string Name { get; private set; }
-
         protected override void PreDeserializeProperty(UnrealBinaryReader reader)
         {
-            Name = reader.ReadFString();
+
         }
 
         protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
-            if (Name == null || Name == "None")
-            {
-                Value = reader.ReadByte();
-            }
-            else
-            {
-                Value = reader.ReadFString();
-            }
+            Value = reader.ReadInt16();
         }
     }
 }
