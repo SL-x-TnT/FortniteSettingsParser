@@ -50,11 +50,6 @@ namespace FortniteSettingsParser.Properties
                 arrayType.ArrayIndex = i;
 
                 items.Add(arrayType);
-
-                if(i == 2800)
-                {
-
-                }
             }
 
             Value = items;
