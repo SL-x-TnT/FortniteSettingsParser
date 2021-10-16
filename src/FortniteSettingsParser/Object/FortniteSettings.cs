@@ -1,40 +1,40 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using FortniteSettingsParser.Property;
 
-using FortniteSettingsParser.Property;
+using System.Collections.Generic;
+using System.IO;
 
 namespace FortniteSettingsParser.Object
 {
     public class FortniteSettings
     {
-        
+
+        public IReadOnlyCollection<FGuid> Guids { get; set; }
+        public IReadOnlyDictionary<string, UProperty> Properties { get; set; }
+
         public FortniteSettingsHeader Header { get; set; }
-
-        public List<FortniteSettingsGuid> Guids { get; set; }
-
-        public Dictionary<string, UProperty> Properties { get; set; }
-
-        public readonly Stopwatch _stopWatch;
-
-        public readonly long _timeTaken;
 
         public FortniteSettings(UnrealBinaryReader stream)
         {
-            Header = new(stream);
-            ParseGuidData(stream);
+            Header = new FortniteSettingsHeader(stream);
+            Guids = ParseGuidData(stream);
             Properties = stream.ReadProperties();
         }
 
-        private void ParseGuidData(UnrealBinaryReader reader)
+        private static IReadOnlyCollection<FGuid> ParseGuidData(UnrealBinaryReader reader)
         {
             var length = reader.ReadInt32();
-            Guids = new List<FortniteSettingsGuid>(length);
+            var guids = new List<FGuid>(length);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
-                var guid = new FortniteSettingsGuid(reader);
-                Guids.Add(guid);
+                var guid = reader.Read<FGuid>();
+                reader.Seek(4, SeekOrigin.Current);
+
+                guids.Add(guid);
             }
+
+            return guids;
         }
+
     }
 }
