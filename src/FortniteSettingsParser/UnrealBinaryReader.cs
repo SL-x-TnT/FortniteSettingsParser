@@ -11,8 +11,8 @@ namespace FortniteSettingsParser
     public class UnrealBinaryReader : GenericStreamReader
     {
 
-        public UnrealBinaryReader(Stream input) : base(input)
-        { }
+        public UnrealBinaryReader(Stream input) 
+        : base(input) { }
 
         public string ReadBytesToString(int count)
         {
@@ -21,8 +21,6 @@ namespace FortniteSettingsParser
         }
 
         public string ReadGuid() => Read<Guid>().ToString();
-
-        public new bool ReadBoolean() => Read<bool>();
         
         public float ReadSingle() => Read<float>();
 
@@ -37,7 +35,6 @@ namespace FortniteSettingsParser
         public Dictionary<string, UProperty> ReadProperties()
         {
             var properties = new Dictionary<string, UProperty>();
-
             while (true)
             {
                 string settingName = ReadFString();

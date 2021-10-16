@@ -3,13 +3,13 @@
     public class FBoolProperty : UProperty
     {
         protected internal override void PreDeserializeProperty(UnrealBinaryReader reader)
-            => Value = reader.ReadBoolean();
+            => Value = reader.Read<bool>());
 
         protected internal override void DeserializeProperty(UnrealBinaryReader reader)
         {
             if(Value == null)
             {
-                Value = reader.ReadBoolean();
+                Value = reader.Read<bool>();
             }
         }
     }
