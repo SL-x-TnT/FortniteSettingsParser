@@ -8,11 +8,11 @@ using GenericReader;
 
 namespace FortniteSettingsParser
 {
-    public sealed class UnrealBinaryReader : GenericStreamReader
+    public class UnrealBinaryReader : GenericStreamReader
     {
 
-        public UnrealBinaryReader(Stream input) : base(input)
-        { }
+        public UnrealBinaryReader(Stream input) 
+        : base(input) { }
 
         public string ReadBytesToString(int count)
         {
@@ -21,8 +21,6 @@ namespace FortniteSettingsParser
         }
 
         public string ReadGuid() => Read<Guid>().ToString();
-
-        public new bool ReadBoolean() => Read<bool>();
         
         public float ReadSingle() => Read<float>();
 
@@ -36,8 +34,7 @@ namespace FortniteSettingsParser
 
         public Dictionary<string, UProperty> ReadProperties()
         {
-            Dictionary<string, UProperty> properties = new();
-
+            var properties = new Dictionary<string, UProperty>();
             while (true)
             {
                 string settingName = ReadFString();
@@ -47,11 +44,12 @@ namespace FortniteSettingsParser
                     return properties;
                 }
 
-                string type = ReadFString();
+                var type = ReadFString();
                 var uProperty = UnrealTypes.GetPropertyByName(type);
                 uProperty.Deserialize(this);
                 properties.Add(settingName, uProperty);
             }
         }
+        
     }
 }

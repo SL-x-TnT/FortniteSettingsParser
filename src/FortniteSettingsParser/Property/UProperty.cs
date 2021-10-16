@@ -25,7 +25,7 @@
 
             PreDeserializeProperty(reader);
 
-            HasPropertyGuid = reader.ReadBoolean();
+            HasPropertyGuid = reader.Read<bool>();
 
             if (HasPropertyGuid)
             {

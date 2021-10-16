@@ -34,7 +34,7 @@ namespace FortniteSettingsParser
             if (!magic.Equals(ClientSettingsMagic)) throw new NotImplementedException("Invalid settings file.");
             _binaryReader.Seek(4, SeekOrigin.Current); //63001 unknown?
 
-            var isCompressed = _binaryReader.ReadInt32() == 1;
+            var isCompressed = _binaryReader.ReadBoolean();
             if (!isCompressed) throw new NotImplementedException("File is not compressed");
 
             var size = _binaryReader.Read<int>();
@@ -45,13 +45,14 @@ namespace FortniteSettingsParser
         {
             var decompressedStream = new MemoryStream(length);
             
-            using var compressedStream = new MemoryStream(data);
-            using var inflaterStream = new InflaterInputStream(compressedStream);
+            await using var compressedStream = new MemoryStream(data);
+            await using var inflaterStream = new InflaterInputStream(compressedStream);
             
             await inflaterStream.CopyToAsync(decompressedStream);
             decompressedStream.Seek(0, SeekOrigin.Begin);
 
             _binaryReader = new UnrealBinaryReader(decompressedStream);
         }
+        
     }
 }
