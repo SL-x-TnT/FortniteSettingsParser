@@ -9,4 +9,10 @@
     <ProjectReference Include="..\FortniteSettingsParser\FortniteSettingsParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\ClientSettings.Sav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
