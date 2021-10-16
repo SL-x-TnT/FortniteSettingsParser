@@ -1,18 +1,16 @@
-﻿using System;
-
-namespace FortniteSettingsParser.Object
+﻿namespace FortniteSettingsParser.Object
 {
     public class FortniteSettingsGuid
     {
 
-        public Guid Guid { get; set; }
+        public string Guid { get; set; }
 
         public int Value { get; set; }
 
-        public FortniteSettingsGuid(string guid, int value)
+        public FortniteSettingsGuid(UnrealBinaryReader reader)
         {
-            Guid = Guid.Parse(guid);
-            Value = value;
+            Guid = reader.ReadGuid();
+            Value = reader.ReadInt32();
         }
     }
 }

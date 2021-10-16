@@ -4,9 +4,7 @@
     {
         
         protected internal override void DeserializeProperty(UnrealBinaryReader reader)
-        {
-            Value = reader.ReadInt32();
-        }
+            => Value = reader.ReadInt32();
 
     }
 }

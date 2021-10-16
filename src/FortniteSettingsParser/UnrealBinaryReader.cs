@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 using FortniteSettingsParser.Property;
 
@@ -21,7 +20,7 @@ namespace FortniteSettingsParser
             return convert.Replace("-", "");
         }
 
-        public string ReadGuid() => ReadBytesToString(16);
+        public string ReadGuid() => Read<Guid>().ToString();
 
         public new bool ReadBoolean() => Read<bool>();
         

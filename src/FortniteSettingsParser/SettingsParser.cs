@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 using FortniteSettingsParser.Object;
 
-using GenericReader;
-
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 namespace FortniteSettingsParser
@@ -16,19 +14,17 @@ namespace FortniteSettingsParser
 
         private const uint ClientSettingsMagic = 0x44464345;
 
-        public static async Task<FortniteSettings> GetClientSettingsAsync(string fileName)
-        {
-            var stream = new FileStream(fileName, FileMode.Open);
-            _binaryReader = new UnrealBinaryReader(stream);
-            await Decompress();
-            return new FortniteSettings(_binaryReader);
-        }
-
         public static async Task<FortniteSettings> GetClientSettingsAsync(Stream stream)
         {
             _binaryReader = new UnrealBinaryReader(stream);
             await Decompress();
             return new FortniteSettings(_binaryReader);
+        }
+
+        public static Task<FortniteSettings> GetClientSettingsAsync(string fileName)
+        {
+            var stream = new FileStream(fileName, FileMode.Open);
+            return GetClientSettingsAsync(stream);
         }
 
         private static async Task Decompress()
