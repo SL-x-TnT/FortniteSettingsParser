@@ -8,7 +8,7 @@ namespace FortniteSettingsParser.Test
     {
         static async Task Main(string[] args)
         {
-            var settings = await SettingsParser.GetClientSettingsAsync("ClientSettings.Sav");
+            var settings = await SettingsParser.GetClientSettingsAsync(Path.Combine("Data", "ClientSettings.Sav"));
 
             Console.WriteLine();
         }
