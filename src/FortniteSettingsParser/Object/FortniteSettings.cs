@@ -16,6 +16,9 @@ namespace FortniteSettingsParser.Object
         public FortniteSettings(UnrealBinaryReader stream)
         {
             Header = new FortniteSettingsHeader(stream);
+
+            stream.Header = Header;
+
             Guids = ParseGuidData(stream);
             Properties = stream.ReadProperties();
         }

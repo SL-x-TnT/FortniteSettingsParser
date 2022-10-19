@@ -22,13 +22,16 @@ namespace FortniteSettingsParser
 			{ "SetProperty", () => new FSetProperty() },
 			{ "IntProperty", () => new FIntProperty() },
 			{ "Int16Property", () => new FInt16Property() },
+			{ "Int8Property", () => new FInt8Property() },
 			{ "UInt32Property", () => new FUInt32Property() },
 			{ "ObjectProperty", () => new FObjectProperty() },
 			{ "ByteProperty", () => new FByteProperty() },
 			{ "Vector2D", () => new FVector2D() },
 			{ "DateTime", () => new FDateTime() },
 			{ "Guid", () => new FGuid() },
-			{ "FortActorRecord", () => new FFortActorRecord() }
+			{ "GUID", () => new FGuid() },
+			{ "FortActorRecord", () => new FFortActorRecord() },
+			{ "GameplayTagContainer", () => new FGameplayTagContainer() },
 		};
 
 		public static bool HasPropertyName(string name)
